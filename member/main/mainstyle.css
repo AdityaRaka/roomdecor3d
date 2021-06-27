@@ -1,0 +1,138 @@
+*{
+    font-family: 'Ubuntu';
+}
+
+/* Navbar */
+.navbar-brand{
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 30px;
+    color: #fff;
+}
+.navbar {
+    padding: 10px;
+    background-color: #1B262C;
+}
+
+.navbar a{
+    margin-left: 20px;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.navbar a:hover{
+    color:#0779E4;
+
+}
+
+.icon a{
+    text-decoration: none;
+    padding-left: 970px;
+}
+
+.user{
+    color: white;
+    padding-right: 20px;
+}
+
+.utama{
+    display: flex;
+}
+
+.utama .kiri{
+    width: 250px;
+    height: 2500px;
+    background-color: #1B262C;
+}
+
+.kiri a{
+    display: block;
+    padding: 20px;
+    margin-left: 25px;
+    margin-right: 25px;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+
+.kiri a:hover{
+    background-color: #0779E4;
+    border-radius: 15px;
+}
+
+.utama .kanan{
+    width: 100%;
+    background-color: #E2E2E2;
+}
+.kanan .text1{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.kanan .text2{
+    font-size: 20px;
+    color: #707070;
+}
+
+.kanan input{
+    width: 900px;
+    height: 35px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    border: 1px solid #707070;
+    outline: none;
+}
+
+.kanan input:focus{
+    border: 3px solid #0779E4;
+}
+
+.kanan .btn{
+    width: 100px;
+    border-radius: 10px;
+    margin-left: 25px;
+    margin-bottom: 5px;
+}
+
+.itemrekom .item{
+    display: inline-block;
+    width: 150px;
+    height: 270px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.item{
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.item img{
+    border-radius: 10px 10px 0 0;
+}
+
+.item p {
+    text-align: center;
+}
+
+.item a{
+    text-decoration: none;
+}
+
+.ikon img{
+    background-color: black;
+}
+
+hr{
+    width: 1220px;
+}
+
+.perabot{
+    padding-top: 10px;
+}
+/* Utility */
+.tombol2{
+    height: 41px;
+    text-transform: uppercase;
+    margin-left: 20px;
+}
