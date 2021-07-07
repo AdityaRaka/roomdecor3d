@@ -13,6 +13,7 @@
     if($result->num_rows > 0){
       $row = mysqli_fetch_assoc($result);
       $_SESSION['nama_member'] = $row['nama_member'];
+      $_SESSION['id_member'] = $row['id_member'];
       header("Location: ../main/idea.php");
     }else {
       echo "<script>alert('Username or Password Unkown.')</script>";

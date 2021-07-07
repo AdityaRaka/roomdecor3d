@@ -12,8 +12,9 @@
         $store = $_POST['store'];
         $condition = $_POST['condition'];
         $image = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
+        $image_design = addslashes(file_get_contents($_FILES["image_design"]["tmp_name"]));
     
-        $sql = "UPDATE data_perabot SET nama_perabot = '$name', brand_perabot = '$brand', jenis_perabot = '$type', harga_perabot = $price, ukuran_perabot = '$size', warna_perabot = '$color', toko_perabot = '$store', kondisi_perabot = '$condition', foto_perabot = '$image' WHERE id_perabot= '$id'";
+        $sql = "UPDATE data_perabot SET nama_perabot = '$name', brand_perabot = '$brand', jenis_perabot = '$type', harga_perabot = $price, ukuran_perabot = '$size', warna_perabot = '$color', toko_perabot = '$store', kondisi_perabot = '$condition', foto_perabot = '$image', foto_desain = '$image_design' WHERE id_perabot= '$id'";
         $result = mysqli_query($connect, $sql);
     
         if($result){

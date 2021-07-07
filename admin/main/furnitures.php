@@ -16,9 +16,10 @@
     $store = $_POST['store'];
     $condition = $_POST['condition'];
     $image = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
+    $image_design = addslashes(file_get_contents($_FILES["image_design"]["tmp_name"]));
 
-    $sql = "INSERT INTO data_perabot (nama_perabot, brand_perabot, jenis_perabot, harga_perabot, ukuran_perabot, warna_perabot, toko_perabot, kondisi_perabot, foto_perabot)
-            VALUES ('$name', '$brand', '$type', '$price', '$size', '$color', '$store', '$condition', '$image')";
+    $sql = "INSERT INTO data_perabot (nama_perabot, brand_perabot, jenis_perabot, harga_perabot, ukuran_perabot, warna_perabot, toko_perabot, kondisi_perabot, foto_perabot, foto_desain)
+            VALUES ('$name', '$brand', '$type', '$price', '$size', '$color', '$store', '$condition', '$image', '$image_design')";
     $result = mysqli_query($connect, $sql);
 
     if($result){
@@ -127,6 +128,11 @@
                 <input type="file" name="image" id="image" class="form-control">
               </div>
 
+              <div class="form-group">
+                <label>Upload Design Image</label>
+                <input type="file" name="image_design" id="image_design" class="form-control">
+              </div>
+
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
@@ -194,6 +200,11 @@
                 <input type="file" name="image" id="image" class="form-control">
               </div>
 
+              <div class="form-group">
+                <label>Upload Design Image</label>
+                <input type="file" name="image_design" id="image_design" class="form-control">
+              </div>
+
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
@@ -247,6 +258,7 @@
           <th scope="col">Store</th>
           <th scope="col">Condition</th>
           <th scope="col">Image</th>
+          <th scope="col">Design Image</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
@@ -270,6 +282,7 @@
                   <td>'.$row['toko_perabot'].'</td>
                   <td>'.$row['kondisi_perabot'].'</td>
                   <td><img src="data:image;base64,'.base64_encode($row['foto_perabot']).'" alt="Image" style="width:100px; height:100px;"></td>
+                  <td><img src="data:image_design;base64,'.base64_encode($row['foto_desain']).'" alt="Image" style="width:100px; height:100px;"></td>
                   <td>
                     <a class="btn btn-primary editbtn">Edit</a>
                     <a class="btn btn-danger deletebtn">Delete</a>
@@ -331,6 +344,7 @@
             $('#store').val(data[7]);
             $('#condition').val(data[8]);
             $('#image').val(data[9]);
+            $('#image_design').val(data[10]);
         });
       });
     </script>

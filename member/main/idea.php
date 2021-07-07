@@ -1,3 +1,40 @@
+<?php
+  include '../controller/connect.php';
+  error_reporting(0);
+
+  //Membuat pengecekan untuk membaca data login di database yakni username dan password
+  session_start();
+  if (!$_SESSION['id_member']) {
+      header("Location: ../login/index.php");
+  }
+  if(isset($_POST['send'])){
+    $username = $_POST['username'];
+    $password = md5($_POST['password']);
+
+    $sql = "SELECT * FROM member WHERE username='$username' AND password='$password'";
+    $result = mysqli_query($connect, $sql);
+    if($result->num_rows > 0){
+      $row = mysqli_fetch_assoc($result);
+      $_SESSION['nama_member'] = $row['nama_member'];
+      header("Location: ../main/idea.php");
+    }else {
+      echo "<script>alert('Username or Password Unkown.')</script>";
+    }
+  }
+    $id_member =$_SESSION['id_member']? $_SESSION['id_member']: 0;
+    $sqlPerabot = "SELECT dp.id_perabot,nama_perabot,brand_perabot,foto_perabot, IF(f.id,true, false) as favorite 
+    from data_perabot dp 
+    left join favorite f on dp.id_perabot = f.id_perabot and f.id_member=  $id_member limit 10";
+    $result = mysqli_query($connect, $sqlPerabot);
+    $items = array();
+    if($result->num_rows > 0){
+    while($row = mysqli_fetch_object($result)){
+      $row->foto_perabot= "data:image/png;base64,".base64_encode($row->foto_perabot);
+      array_push($items, $row);
+    }
+    // print_r($items);
+    }
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -241,102 +278,35 @@
 
         <div class="wrapper">
           <div class="gallery">
+            <?php $images = [
+            "../libs/ideaimg/Heim Studio Oda Sofa Bed Biru.jpg",
+            "../libs/ideaimg/Artista Home Fendi Coffee Table without Shelf Cream.jpg",
+            "../libs/ideaimg/Ashley 180x200x29 Cm Kasur Euro Top M915.jpg",
+            "../libs/ideaimg/Heim Studio VINN Rak Buku.jpg",
+            "../libs/ideaimg/Ezma Conrad Sofa 3 Dudukan Dark Grey.jpg",
+            "../libs/ideaimg/Ezma Olaf Sofa 3 Dudukan Biru.jpg",
+            "../libs/ideaimg/Ezma Stefan Sofa 3 Dudukan Grey.jpg",
+            "../libs/ideaimg/Heim Studio EIJI Meja Makan 190.jpg",
+            "../libs/ideaimg/Heim Studio Hara Sofa 2 Dudukan Biru.jpg",
+            "../libs/ideaimg/Heim Studio Kanou Meja TV.jpg",
+            "../libs/ideaimg/Livien Rak buku Elmo Series Tipe 1.jpg",
+            "../libs/ideaimg/Ridente Andrea Armchair RC 27.jpg"
+            ]; ?>
+            <?php foreach ($items as $key => $item):?>
             <div class="image">
-              <span><img src="../libs/ideaimg/Heim Studio Oda Sofa Bed Biru.jpg" alt=""></span>
+              <span><img src="<?=$item->foto_perabot?>" alt=""></span>
               <div class="bottom">
                 <div class="text">
-                  <a href="#"><i class="ri-heart-3-line"></i></a>
+                  <?php if(!$item->favorite): ?>
+                    <a class="like" data-id="<?=$item->id_perabot?>"><i class="ri-heart-3-line"></i></a>
+                  <?php else: ?>
+                    <a class="like" data-id="<?=$item->id_perabot?>"><i class="ri-heart-3-fill"></i></a>
+                  <?php endif ?>
+
                 </div>
               </div>
             </div>
-            <div class="image">
-              <span><img src="../libs/ideaimg/Artista Home Fendi Coffee Table without Shelf Cream.jpg" alt=""></span>
-              <div class="bottom">
-                <div class="text">
-                  <i class="ri-heart-3-line"></i>
-                </div>
-              </div>
-            </div>
-            <div class="image">
-              <span><img src="../libs/ideaimg/Ashley 180x200x29 Cm Kasur Euro Top M915.jpg" alt=""></span>
-              <div class="bottom">
-                <div class="text">
-                  <i class="ri-heart-3-line"></i>
-                </div>
-              </div>
-            </div>
-            <div class="image">
-              <span><img src="../libs/ideaimg/Heim Studio VINN Rak Buku.jpg" alt=""></span>
-              <div class="bottom">
-                <div class="text">
-                  <i class="ri-heart-3-line"></i>
-                </div>
-              </div>
-            </div>
-            <div class="image">
-              <span><img src="../libs/ideaimg/Ezma Conrad Sofa 3 Dudukan Dark Grey.jpg" alt=""></span>
-              <div class="bottom">
-                <div class="text">
-                  <i class="ri-heart-3-line"></i>
-                </div>
-              </div>
-            </div>
-            <div class="image">
-              <span><img src="../libs/ideaimg/Ezma Olaf Sofa 3 Dudukan Biru.jpg" alt=""></span>
-              <div class="bottom">
-                <div class="text">
-                  <i class="ri-heart-3-line"></i>
-                </div>
-              </div>
-            </div>
-            <div class="image">
-              <span><img src="../libs/ideaimg/Ezma Stefan Sofa 3 Dudukan Grey.jpg" alt=""></span>
-              <div class="bottom">
-                <div class="text">
-                  <i class="ri-heart-3-line"></i>
-                </div>
-              </div>
-            </div>
-            <div class="image">
-              <span><img src="../libs/ideaimg/Heim Studio EIJI Meja Makan 190.jpg" alt=""></span>
-              <div class="bottom">
-                <div class="text">
-                  <i class="ri-heart-3-line"></i>
-                </div>
-              </div>
-            </div>
-            <div class="image">
-              <span><img src="../libs/ideaimg/Heim Studio Hara Sofa 2 Dudukan Biru.jpg" alt=""></span>
-              <div class="bottom">
-                <div class="text">
-                  <i class="ri-heart-3-line"></i>
-                </div>
-              </div>
-            </div>
-            <div class="image">
-              <span><img src="../libs/ideaimg/Heim Studio Kanou Meja TV.jpg" alt=""></span>
-              <div class="bottom">
-                <div class="text">
-                  <i class="ri-heart-3-line"></i>
-                </div>
-              </div>
-            </div>
-            <div class="image">
-              <span><img src="../libs/ideaimg/Livien Rak buku Elmo Series Tipe 1.jpg" alt=""></span>
-              <div class="bottom">
-                <div class="text">
-                  <i class="ri-heart-3-line"></i>
-                </div>
-              </div>
-            </div>
-            <div class="image">
-              <span><img src="../libs/ideaimg/Ridente Andrea Armchair RC 27.jpg" alt=""></span>
-              <div class="bottom">
-                <div class="text">
-                  <i class="ri-heart-3-line"></i>
-                </div>
-              </div>
-            </div>
+            <?php endforeach; ?>
           </div>
         </div>
         <div class="preview-box">
@@ -361,12 +331,39 @@
     <!-- Optional JavaScript; choose one of the two! -->
     <script src="../js/script.js"></script>
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
     -->
+    <script type="text/javascript">
+
+      $('.like').click(function(){
+        const id = $(this).attr('data-id');
+        var request = $.ajax({
+          url: `/main/savelike.php?id_perabot=${id}`,
+          cache: false
+        });
+        request.done(function(msg) {
+          console.log('HASIL',msg)
+          alert('berhasil '+ msg)
+          $.ajax({
+             url: `/compute/algorithm.php`,
+             cache: false
+           }).done(function(algo){           
+            console.log('ALGO',algo)
+           });
+            location.reload()
+        });
+        request.fail(function(jqXHR,msg) {
+          alert(jqXHR.statusText)
+          console.log('GAGAL',jqXHR,msg)
+        });
+        return false
+      })
+    </script>
   </body>
 </html>

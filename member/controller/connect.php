@@ -1,4 +1,3 @@
-<!-- Membuat koneksi dengan database mysql -->
 <?php
 $server = "localhost";
 $user = "root";
