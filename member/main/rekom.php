@@ -1,24 +1,3 @@
-<?php
-  include '../controller/connect.php';
-  session_start();
-
-  if (!$_SESSION['id_member']) {
-      header("Location: ../login/index.php");
-  }
-  $id_member =$_SESSION['id_member']? $_SESSION['id_member']: 0;
-  $sqlPerabot = "SELECT dp.id_perabot,nama_perabot,brand_perabot,foto_perabot,harga_perabot
-  from data_perabot dp 
-  inner join recomendation f on dp.id_perabot = f.id_perabot and f.id_member=  $id_member limit 10";
-  $result = mysqli_query($connect, $sqlPerabot);
-  $recomendations = array();
-  if($result->num_rows > 0){
-  while($row = mysqli_fetch_object($result)){
-    $row->foto_perabot= "data:image/png;base64,".base64_encode($row->foto_perabot);
-    array_push($recomendations, $row);
-  }
-  // print_r($items);
-  }
-?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -62,7 +41,7 @@
           <ul class="navbar-nav">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <?=$_SESSION['nama_member']?>
+                Userxxx
               </a>
               <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                 <li><a class="dropdown-item" href="profile.php">Profile</a></li>
@@ -92,7 +71,7 @@
     <!-- Bagian Section Kanan -->
       <div class="kanan" style="padding-top:20px; padding-left:30px">
         <p class="text1">New Recommended Furnitures</p>
-        <p class="text2">Enjoy new furnitures we recommended just for you <?=$_SESSION['nama_member']?>!</p>
+        <p class="text2">Enjoy new furnitures we recommended just for you!</p>
         <hr>
 
         <div class="itemrekom">
@@ -147,16 +126,152 @@
             </div>
 
             <p class="recom" style="padding-left:20px; padding-top:20px; font-size:30px; font-weight:bold">Recommended for you</p>
-            <?php foreach($recomendations as $recomendation):  ?>
-              <div class="item">
-                <img src="../libs/img/Heim Studio Oda Sofa Bed Biru.jpg" width="150px">
-                <a href="https://www.dekoruma.com/p/NRA-368641/Heim-Studio-Oda-Sofa-Bed-biru"><p><?=$recomendation->nama_perabot?></p></a>
-                <p style="margin-bottom:0">IDR <?=number_format($recomendation->harga_perabot,0,",",".")?></p>
-                <a href="https://www.dekoruma.com/"><p>Dekoruma.com</p></a>
-              </div>
-            <?php endforeach; ?>
+            <div class="item">
+              <img src="../libs/img/Heim Studio Oda Sofa Bed Biru.jpg" width="150px">
+              <a href="https://www.dekoruma.com/p/NRA-368641/Heim-Studio-Oda-Sofa-Bed-biru"><p>Home Studio Oda Sofa Bed Biru</p></a>
+              <p style="margin-bottom:0">IDR 1,519,000</p>
+              <a href="https://www.dekoruma.com/"><p>Dekoruma.com</p></a>
+            </div>
 
-            
+            <div class="item">
+              <img src="../libs/img/Heim Studio Oda Sofa Bed Biru.jpg" width="150px">
+              <a href="https://www.dekoruma.com/p/NRA-368641/Heim-Studio-Oda-Sofa-Bed-biru"><p>Home Studio Oda Sofa Bed Biru</p></a>
+              <p style="margin-bottom:0">IDR 1,519,000</p>
+              <a href="https://www.dekoruma.com/"><p>Dekoruma.com</p></a>
+            </div>
+
+            <div class="item">
+              <img src="../libs/img/Heim Studio Oda Sofa Bed Biru.jpg" width="150px">
+              <a href="https://www.dekoruma.com/p/NRA-368641/Heim-Studio-Oda-Sofa-Bed-biru"><p>Home Studio Oda Sofa Bed Biru</p></a>
+              <p style="margin-bottom:0">IDR 1,519,000</p>
+              <a href="https://www.dekoruma.com/"><p>Dekoruma.com</p></a>
+            </div>
+
+            <div class="item">
+              <img src="../libs/img/Heim Studio Oda Sofa Bed Biru.jpg" width="150px">
+              <a href="https://www.dekoruma.com/p/NRA-368641/Heim-Studio-Oda-Sofa-Bed-biru"><p>Home Studio Oda Sofa Bed Biru</p></a>
+              <p style="margin-bottom:0">IDR 1,519,000</p>
+              <a href="https://www.dekoruma.com/"><p>Dekoruma.com</p></a>
+            </div>
+
+            <div class="item">
+              <img src="../libs/img/Heim Studio Oda Sofa Bed Biru.jpg" width="150px">
+              <a href="https://www.dekoruma.com/p/NRA-368641/Heim-Studio-Oda-Sofa-Bed-biru"><p>Home Studio Oda Sofa Bed Biru</p></a>
+              <p style="margin-bottom:0">IDR 1,519,000</p>
+              <a href="https://www.dekoruma.com/"><p>Dekoruma.com</p></a>
+            </div>
+
+            <div class="item">
+              <img src="../libs/img/Heim Studio Oda Sofa Bed Biru.jpg" width="150px">
+              <a href="https://www.dekoruma.com/p/NRA-368641/Heim-Studio-Oda-Sofa-Bed-biru"><p>Home Studio Oda Sofa Bed Biru</p></a>
+              <p style="margin-bottom:0">IDR 1,519,000</p>
+              <a href="https://www.dekoruma.com/"><p>Dekoruma.com</p></a>
+            </div>
+
+            <div class="item">
+              <img src="../libs/img/Heim Studio Oda Sofa Bed Biru.jpg" width="150px">
+              <a href="https://www.dekoruma.com/p/NRA-368641/Heim-Studio-Oda-Sofa-Bed-biru"><p>Home Studio Oda Sofa Bed Biru</p></a>
+              <p style="margin-bottom:0">IDR 1,519,000</p>
+              <a href="https://www.dekoruma.com/"><p>Dekoruma.com</p></a>
+            </div>
+
+            <div class="item">
+              <img src="../libs/img/Heim Studio Oda Sofa Bed Biru.jpg" width="150px">
+              <a href="https://www.dekoruma.com/p/NRA-368641/Heim-Studio-Oda-Sofa-Bed-biru"><p>Home Studio Oda Sofa Bed Biru</p></a>
+              <p style="margin-bottom:0">IDR 1,519,000</p>
+              <a href="https://www.dekoruma.com/"><p>Dekoruma.com</p></a>
+            </div>
+
+            <div class="item">
+              <img src="../libs/img/Heim Studio Oda Sofa Bed Biru.jpg" width="150px">
+              <a href="https://www.dekoruma.com/p/NRA-368641/Heim-Studio-Oda-Sofa-Bed-biru"><p>Home Studio Oda Sofa Bed Biru</p></a>
+              <p style="margin-bottom:0">IDR 1,519,000</p>
+              <a href="https://www.dekoruma.com/"><p>Dekoruma.com</p></a>
+            </div>
+
+            <div class="item">
+              <img src="../libs/img/Heim Studio Oda Sofa Bed Biru.jpg" width="150px">
+              <a href="https://www.dekoruma.com/p/NRA-368641/Heim-Studio-Oda-Sofa-Bed-biru"><p>Home Studio Oda Sofa Bed Biru</p></a>
+              <p style="margin-bottom:0">IDR 1,519,000</p>
+              <a href="https://www.dekoruma.com/"><p>Dekoruma.com</p></a>
+            </div>
+
+            <div class="item">
+              <img src="../libs/img/Heim Studio Oda Sofa Bed Biru.jpg" width="150px">
+              <a href="https://www.dekoruma.com/p/NRA-368641/Heim-Studio-Oda-Sofa-Bed-biru"><p>Home Studio Oda Sofa Bed Biru</p></a>
+              <p style="margin-bottom:0">IDR 1,519,000</p>
+              <a href="https://www.dekoruma.com/"><p>Dekoruma.com</p></a>
+            </div>
+
+            <div class="item">
+              <img src="../libs/img/Heim Studio Oda Sofa Bed Biru.jpg" width="150px">
+              <a href="https://www.dekoruma.com/p/NRA-368641/Heim-Studio-Oda-Sofa-Bed-biru"><p>Home Studio Oda Sofa Bed Biru</p></a>
+              <p style="margin-bottom:0">IDR 1,519,000</p>
+              <a href="https://www.dekoruma.com/"><p>Dekoruma.com</p></a>
+            </div>
+
+            <div class="item">
+              <img src="../libs/img/Heim Studio Oda Sofa Bed Biru.jpg" width="150px">
+              <a href="https://www.dekoruma.com/p/NRA-368641/Heim-Studio-Oda-Sofa-Bed-biru"><p>Home Studio Oda Sofa Bed Biru</p></a>
+              <p style="margin-bottom:0">IDR 1,519,000</p>
+              <a href="https://www.dekoruma.com/"><p>Dekoruma.com</p></a>
+            </div>
+
+            <div class="item">
+              <img src="../libs/img/Heim Studio Oda Sofa Bed Biru.jpg" width="150px">
+              <a href="https://www.dekoruma.com/p/NRA-368641/Heim-Studio-Oda-Sofa-Bed-biru"><p>Home Studio Oda Sofa Bed Biru</p></a>
+              <p style="margin-bottom:0">IDR 1,519,000</p>
+              <a href="https://www.dekoruma.com/"><p>Dekoruma.com</p></a>
+            </div>
+
+                        <div class="item">
+              <img src="../libs/img/Heim Studio Oda Sofa Bed Biru.jpg" width="150px">
+              <a href="https://www.dekoruma.com/p/NRA-368641/Heim-Studio-Oda-Sofa-Bed-biru"><p>Home Studio Oda Sofa Bed Biru</p></a>
+              <p style="margin-bottom:0">IDR 1,519,000</p>
+              <a href="https://www.dekoruma.com/"><p>Dekoruma.com</p></a>
+            </div>
+
+            <div class="item">
+              <img src="../libs/img/Heim Studio Oda Sofa Bed Biru.jpg" width="150px">
+              <a href="https://www.dekoruma.com/p/NRA-368641/Heim-Studio-Oda-Sofa-Bed-biru"><p>Home Studio Oda Sofa Bed Biru</p></a>
+              <p style="margin-bottom:0">IDR 1,519,000</p>
+              <a href="https://www.dekoruma.com/"><p>Dekoruma.com</p></a>
+            </div>
+
+            <div class="item">
+              <img src="../libs/img/Heim Studio Oda Sofa Bed Biru.jpg" width="150px">
+              <a href="https://www.dekoruma.com/p/NRA-368641/Heim-Studio-Oda-Sofa-Bed-biru"><p>Home Studio Oda Sofa Bed Biru</p></a>
+              <p style="margin-bottom:0">IDR 1,519,000</p>
+              <a href="https://www.dekoruma.com/"><p>Dekoruma.com</p></a>
+            </div>
+
+            <div class="item">
+              <img src="../libs/img/Heim Studio Oda Sofa Bed Biru.jpg" width="150px">
+              <a href="https://www.dekoruma.com/p/NRA-368641/Heim-Studio-Oda-Sofa-Bed-biru"><p>Home Studio Oda Sofa Bed Biru</p></a>
+              <p style="margin-bottom:0">IDR 1,519,000</p>
+              <a href="https://www.dekoruma.com/"><p>Dekoruma.com</p></a>
+            </div>
+
+            <div class="item">
+              <img src="../libs/img/Heim Studio Oda Sofa Bed Biru.jpg" width="150px">
+              <a href="https://www.dekoruma.com/p/NRA-368641/Heim-Studio-Oda-Sofa-Bed-biru"><p>Home Studio Oda Sofa Bed Biru</p></a>
+              <p style="margin-bottom:0">IDR 1,519,000</p>
+              <a href="https://www.dekoruma.com/"><p>Dekoruma.com</p></a>
+            </div>
+
+            <div class="item">
+              <img src="../libs/img/Heim Studio Oda Sofa Bed Biru.jpg" width="150px">
+              <a href="https://www.dekoruma.com/p/NRA-368641/Heim-Studio-Oda-Sofa-Bed-biru"><p>Home Studio Oda Sofa Bed Biru</p></a>
+              <p style="margin-bottom:0">IDR 1,519,000</p>
+              <a href="https://www.dekoruma.com/"><p>Dekoruma.com</p></a>
+            </div>
+
+            <div class="item">
+              <img src="../libs/img/Heim Studio Oda Sofa Bed Biru.jpg" width="150px">
+              <a href="https://www.dekoruma.com/p/NRA-368641/Heim-Studio-Oda-Sofa-Bed-biru"><p>Home Studio Oda Sofa Bed Biru</p></a>
+              <p style="margin-bottom:0">IDR 1,519,000</p>
+              <a href="https://www.dekoruma.com/"><p>Dekoruma.com</p></a>
+            </div>
 
             
         </div>

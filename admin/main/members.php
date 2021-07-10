@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&family=Open+Sans&family=Roboto&display=swap" rel="stylesheet">
     <title>Members</title>
-    <link rel="stylesheet" href="stylemain.css">
+    <link rel="stylesheet" href="mainstyle.css">
   </head>
   <body>
     <!-- navbar -->

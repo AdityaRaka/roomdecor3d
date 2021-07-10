@@ -8,7 +8,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 112%;
+    width: 101%;
   }
 .navbar > .top {
   position: absolute;
@@ -48,7 +48,7 @@ h1{
 
 hr{
     margin-left: 20px;
-    width: 110%;
+    width: 100%;
 }
 
 #add{
@@ -57,9 +57,7 @@ hr{
 }
 
 .table{
-    margin-top: 10px;
-    margin-left: 20px;
-    width: 110%;
+    margin: 10px;
     table-layout: fixed;
     text-align: center;
     border-collapse: collapse;

@@ -5,16 +5,13 @@
         $id = $_POST['update_id'];
         $name = $_POST['name'];
         $brand = $_POST['brand'];
-        $type = $_POST['type'];
         $price = $_POST['price'];
-        $size = $_POST['size'];
-        $color = $_POST['color'];
         $store = $_POST['store'];
-        $condition = $_POST['condition'];
+        $link = $_POST['link'];
         $image = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
         $image_design = addslashes(file_get_contents($_FILES["image_design"]["tmp_name"]));
     
-        $sql = "UPDATE data_perabot SET nama_perabot = '$name', brand_perabot = '$brand', jenis_perabot = '$type', harga_perabot = $price, ukuran_perabot = '$size', warna_perabot = '$color', toko_perabot = '$store', kondisi_perabot = '$condition', foto_perabot = '$image', foto_desain = '$image_design' WHERE id_perabot= '$id'";
+        $sql = "UPDATE data_perabot SET nama_perabot = '$name', brand_perabot = '$brand', harga_perabot = $price, toko_perabot = '$store', foto_perabot = '$image', foto_desain = '$image_design', link_perabot = '$link' WHERE id_perabot= '$id'";
         $result = mysqli_query($connect, $sql);
     
         if($result){

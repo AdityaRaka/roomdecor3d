@@ -2,31 +2,30 @@
   include '../controller/connect.php';
   session_start();
 
-  if (!isset($_SESSION['nama_admin'])) {
+  if (!isset($_SESSION['nama_admin'])){
     header("Location: ../login/index.php");
   }
   
   if(isset ($_POST['send'])){
     $name = $_POST['name'];
     $brand = $_POST['brand'];
-    $type = $_POST['type'];
     $price = $_POST['price'];
-    $size = $_POST['size'];
-    $color = $_POST['color'];
     $store = $_POST['store'];
-    $condition = $_POST['condition'];
+    $link = $_POST['link'];
     $image = addslashes(file_get_contents($_FILES["image"]["tmp_name"]));
     $image_design = addslashes(file_get_contents($_FILES["image_design"]["tmp_name"]));
 
-    $sql = "INSERT INTO data_perabot (nama_perabot, brand_perabot, jenis_perabot, harga_perabot, ukuran_perabot, warna_perabot, toko_perabot, kondisi_perabot, foto_perabot, foto_desain)
-            VALUES ('$name', '$brand', '$type', '$price', '$size', '$color', '$store', '$condition', '$image', '$image_design')";
+    $sql = "INSERT INTO data_perabot (nama_perabot, brand_perabot, harga_perabot, toko_perabot, foto_perabot, foto_desain, link_perabot)
+            VALUES ('$name', '$brand', '$price', '$store', '$image', '$image_design', $link)";
     $result = mysqli_query($connect, $sql);
 
     if($result){
+      move_uploaded_file($_FILES["image_design"]["tmp_name"], 'ideaimg/'.$image_design);
       header("Location:furnitures.php");
       exit;
     }else {
       echo "<script>alert('Something Went Wrong.')</script>";
+      header("Location:furnitures.php");
     }
   }
     
@@ -44,7 +43,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&family=Open+Sans&family=Roboto&display=swap" rel="stylesheet">
     <title>Furnitures</title>
-    <link rel="stylesheet" href="stylemain.css">
+    <link rel="stylesheet" href="mainstyle.css">
   </head>
   <body>
     <!-- navbar -->
@@ -85,44 +84,30 @@
             <div class="modal-body">
               <div class="form-group">
                 <label>Furniture Name</label>
-                <input type="text" name="name" class="form-control">
+                <input type="text" name="name" class="form-control" required>
               </div>
 
               <div class="form-group">
                 <label>Brand</label>
-                <input type="text" name="brand" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label>Type</label>
-                <input type="text" name="type" class="form-control">
+                <input type="text" name="brand" class="form-control" required>
               </div>
 
               <div class="form-group">
                 <label>Price</label>
-                <input type="text" name="price" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label>Size</label>
-                <input type="text" name="size" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label>Color</label>
-                <input type="text" name="color" class="form-control">
+                <input type="text" name="price" class="form-control" required>
               </div>
 
               <div class="form-group">
                 <label>Store</label>
-                <input type="text" name="store" class="form-control">
+                <input type="text" name="store" class="form-control" required>
               </div>
 
+              
               <div class="form-group">
-                <label>Condition</label>
-                <input type="text" name="condition" class="form-control">
+                <label>Link</label>
+                <input type="text" name="link" class="form-control" required>
               </div>
-
+              
               <div class="form-group">
                 <label>Upload Furniture Image</label>
                 <input type="file" name="image" id="image" class="form-control">
@@ -157,44 +142,30 @@
               <input type="hidden" name="update_id" id="update_id">
               <div class="form-group">
                 <label>Furniture Name</label>
-                <input type="text" name="name" id="name" class="form-control">
+                <input type="text" name="name" id="name" class="form-control" required>
               </div>
 
               <div class="form-group">
                 <label>Brand</label>
-                <input type="text" name="brand" id="brand" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label>Type</label>
-                <input type="text" name="type" id="type" class="form-control">
+                <input type="text" name="brand" id="brand" class="form-control" required>
               </div>
 
               <div class="form-group">
                 <label>Price</label>
-                <input type="text" name="price" id="price" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label>Size</label>
-                <input type="text" name="size" id="size" class="form-control">
-              </div>
-
-              <div class="form-group">
-                <label>Color</label>
-                <input type="text" name="color" id="color" class="form-control">
+                <input type="text" name="price" id="price" class="form-control" required>
               </div>
 
               <div class="form-group">
                 <label>Store</label>
-                <input type="text" name="store" id="store" class="form-control">
+                <input type="text" name="store" id="store" class="form-control" required>
               </div>
 
+              
               <div class="form-group">
-                <label>Condition</label>
-                <input type="text" name="condition" id="condition" class="form-control">
+                <label>Link</label>
+                <input type="text" name="link" id="link" class="form-control" required>
               </div>
-
+              
               <div class="form-group">
                 <label>Upload Furniture Image</label>
                 <input type="file" name="image" id="image" class="form-control">
@@ -251,12 +222,9 @@
           <th scope="col">No.</th>
           <th scope="col">Furniture Name</th>
           <th scope="col">Brand</th>
-          <th scope="col">Type</th>
           <th scope="col">Price</th>
-          <th scope="col">Size</th>
-          <th scope="col">Color</th>
           <th scope="col">Store</th>
-          <th scope="col">Condition</th>
+          <th scope="col">Link</th>
           <th scope="col">Image</th>
           <th scope="col">Design Image</th>
           <th scope="col">Action</th>
@@ -275,14 +243,11 @@
                   <td>'.$no.'</td>
                   <td>'.$row['nama_perabot'].'</td>
                   <td>'.$row['brand_perabot'].'</td>
-                  <td>'.$row['jenis_perabot'].'</td>
                   <td>'.$row['harga_perabot'].'</td>
-                  <td>'.$row['ukuran_perabot'].'</td>
-                  <td>'.$row['warna_perabot'].'</td>
                   <td>'.$row['toko_perabot'].'</td>
-                  <td>'.$row['kondisi_perabot'].'</td>
-                  <td><img src="data:image;base64,'.base64_encode($row['foto_perabot']).'" alt="Image" style="width:100px; height:100px;"></td>
-                  <td><img src="data:image_design;base64,'.base64_encode($row['foto_desain']).'" alt="Image" style="width:100px; height:100px;"></td>
+                  <td>'.$row['link_perabot'].'</td>
+                  <td><img src="data:image;base64,'.base64_encode($row['foto_perabot']).'" alt="Image" width=100px height=auto></td>
+                  <td><img src="data:image;base64,'.base64_encode($row['foto_desain']).'" alt="Image" width=100px height=auto></td>
                   <td>
                     <a class="btn btn-primary editbtn">Edit</a>
                     <a class="btn btn-danger deletebtn">Delete</a>
@@ -337,14 +302,11 @@
             $('#update_id').val(data[0]);
             $('#name').val(data[1]);
             $('#brand').val(data[2]);
-            $('#type').val(data[3]);
-            $('#price').val(data[4]);
-            $('#size').val(data[5]);
-            $('#color').val(data[6]);
-            $('#store').val(data[7]);
-            $('#condition').val(data[8]);
-            $('#image').val(data[9]);
-            $('#image_design').val(data[10]);
+            $('#price').val(data[3]);
+            $('#store').val(data[4]);
+            $('#link').val(data[5]);
+            $('#image').val(data[6]);
+            $('#image_design').val(data[7]);
         });
       });
     </script>
